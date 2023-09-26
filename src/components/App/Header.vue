@@ -21,7 +21,7 @@
           v-for="item in props.user?.before"
           :key="item"
         >
-          <NuxtLink :to="generateUrl(item.name)">{{ item }}</NuxtLink>
+          <NuxtLink :to="generateUrl(item)">{{ item }}</NuxtLink>
         </li>
         <li
           class="header__item"
