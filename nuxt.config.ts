@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   // devtools: { enabled: true },
   runtimeConfig: {
     public: {
-      api: 'https://api.bodyundefined.com/',
+      api: '',
     },
   },
   app: {
