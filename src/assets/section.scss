@@ -1,0 +1,19 @@
+.section {
+  margin-bottom: 64px;
+
+  &__list {
+    display: grid;
+    gap: 32px;
+    margin-bottom: 64px;
+  }
+
+  .grid {
+    &--two {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    &--three {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}

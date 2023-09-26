@@ -1,0 +1,16 @@
+.main {
+  margin-top: 48px;
+
+  & > .inner {
+    width: 1152px;
+    margin: 0 auto;
+  }
+}
+.content-exhibition {
+  position: relative;
+  width: 560px;
+  height: 280px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: center/cover no-repeat;
+}

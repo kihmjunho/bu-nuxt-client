@@ -1,0 +1,51 @@
+.form {
+  margin: auto;
+
+  &--content {
+    width: 750px;
+  }
+
+  &__input,
+  &__select,
+  &__textarea,
+  &__file,
+  &__button {
+    color: #fff;
+    font-size: 20px;
+    padding: 5px;
+    width: 100%;
+  }
+
+  &__input,
+  &__textarea,
+  &__select {
+    margin-bottom: 20px;
+  }
+
+  &__input,
+  &__textarea {
+    border: solid;
+    background: none;
+    border-width: 0 0 1px 0;
+    border-radius: 0;
+  }
+
+  &__select {
+    // color: #000;
+    background: #000;
+
+    &-option {
+      color: #000;
+      //   background: #000;
+    }
+  }
+
+  &__button {
+    margin-top: 32px;
+    padding: 5px;
+    border: 1px solid;
+    border-radius: 0px;
+    background: #000;
+    text-transform: uppercase;
+  }
+}

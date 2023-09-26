@@ -1,0 +1,29 @@
+.post {
+  &__comment {
+    width: 720px;
+
+    &-form,
+    &-textarea {
+      width: 720px;
+    }
+
+    &-textarea {
+      height: 64px;
+    }
+
+    &-button {
+      width: 100%;
+      padding: 8px;
+    }
+
+    &-item {
+      background: #333;
+      margin-bottom: 16px;
+      padding: 8px;
+    }
+    &-header {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
