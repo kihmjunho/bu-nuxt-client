@@ -66,33 +66,18 @@
 }
 
 @media screen and (max-width: 800px) {
-  .cover {
-    &__title {
-      left: 2.5vw;
-      // position: relative;
-      // width: 100%;
-      padding: 5px;
-      // z-index: 1;
-      line-height: 40px;
-
-      .key {
-        font-size: 32px;
+  .cover__slogan {
+    & > div {
+      &:first-child {
+        font-size: calc(72px * 0.7);
       }
 
-      .more {
-        font-size: 20px;
+      &:last-child {
+        font-size: calc(48px * 0.7);
       }
-    }
 
-    &__message {
-      & > .letters {
-        &__big {
-          font-size: 32px;
-        }
-
-        &__small {
-          font-size: 20px;
-        }
+      & > span {
+        left: calc(-2px * 0.7);
       }
     }
   }

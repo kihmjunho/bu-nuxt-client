@@ -1,7 +1,9 @@
 <template>
   <header class="header">
     <h1 class="header__title">
-      <NuxtLink class="header__link" to="/">BODY UNDEFINED</NuxtLink>
+      <NuxtLink class="header__link" @click="closeDrawer" to="/">
+        BODY UNDEFINED
+      </NuxtLink>
     </h1>
 
     <button
@@ -12,7 +14,11 @@
       <img src="../../static/arrow.svg" alt="" class="header__button-arrow" />
     </button>
 
-    <div class="header__nav" :class="{ active: drawerState }">
+    <div
+      class="header__nav"
+      :class="{ active: drawerState }"
+      @click="toggleDrawer"
+    >
       <ul class="header__list list--content">
         <li
           class="header__item"
@@ -54,8 +60,7 @@ const props = defineProps({
 
 const drawerState = ref(false);
 const toggleDrawer = () => (drawerState.value = !drawerState.value);
-// const closeDrawer = () => (drawerState.value = false);
-
+const closeDrawer = () => (drawerState.value = false);
 const generateUrl = (item: string) => {
   return item === 'my page' ? '/mypage' : `/${item}`;
 };
