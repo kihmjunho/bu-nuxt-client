@@ -2,17 +2,23 @@
   <template v-if="item">
     <Head>
       <Title>{{ item.title }}</Title>
-      <!-- <Meta name="description" :content="item.metaText" />
-          <Meta property="og:description" :content="item.metaText" /> -->
+      <Meta name="description" :content="metaDescription" />
+      <Meta property="og:description" :content="metaDescription" />
       <Meta property="og:image" :content="item.thumbnail" />
     </Head>
+
     <div class="post">
       <PostDetail :data="item" />
 
-      <PostControl :category="category" :subCategory="subCategory" :id="id" />
+      <PostControl
+        v-if="item.userId === userId"
+        :category="category"
+        :subCategory="subCategory"
+        :id="id"
+      />
 
-      <div class="post__comment">
-        <PostCommentForm @emitCreate="createComment" />
+      <!-- <div class="post__comment">
+        <PostCommentForm v-if="isLogin" @emitCreate="createComment" />
 
         <PostCommentList>
           <PostCommentItem
@@ -24,13 +30,7 @@
             @emitReply="createReply"
           />
         </PostCommentList>
-      </div>
-
-      <!-- v-if="isLogin && isOwner" -->
-      <!--   <template v-if="item.title">
-      
-          </template>
-          <div v-else>not found</div>-->
+      </div> -->
     </div>
   </template>
 </template>
@@ -38,16 +38,16 @@
 <script setup lang="ts">
 import { ContentDetail, Params } from '@/types/types';
 
+const { api } = useRuntimeConfig().public;
+
 import { useUserStore } from '@/stores/user';
 import { storeToRefs } from 'pinia';
 
 const userStore = useUserStore();
-const { isLogin, isOwner, userId } = storeToRefs(userStore);
-const { api } = useRuntimeConfig().public;
+const { isLogin, userId } = storeToRefs(userStore);
 
 const params = useRoute().params as unknown;
 const { category, subCategory, id } = params as Params;
-// const { push } = useRouter();
 
 const { data: item } = useAsyncData<ContentDetail>('item', async () => {
   return await $fetch(`${api}creations/${category}s/${id}`, {
@@ -55,6 +55,20 @@ const { data: item } = useAsyncData<ContentDetail>('item', async () => {
       authentication: useCookie('buToken').value || '',
     },
   });
+});
+
+const metaDescription = computed(() => {
+  if (item.value && category === 'artwork') {
+    return `Artwork Introduction for ${item.value.title}`;
+  }
+
+  if (item.value && category === 'exhibition') {
+    return `Exhibition Introduction for ${item.value.title}`;
+  }
+
+  if (item.value && category === 'post') {
+    return item.value.metaDescription;
+  }
 });
 
 const comments = ref<any>([]);
@@ -106,10 +120,5 @@ const createReply = async (data: any) => {
 //   await $fetch(`${postApi}/comments/${id}`, { method: 'delete' });
 
 //   getComment();
-// };
-
-// const deletePost = async () => {
-//   await $fetch(`${postApi}`, { method: 'delete' });
-//   push('/');
 // };
 </script>

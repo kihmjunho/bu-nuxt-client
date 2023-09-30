@@ -1,10 +1,10 @@
 <template>
-  <h1 v-if="!props.data.width">{{ props.data.title }}</h1>
-  <img style="width: 500px" :src="props.data.thumbnail" alt="" />
-  <h1 v-if="props.data.width" class="post-detail__caption">{{ caption }}</h1>
-  <div v-html="props.data.description" />
+  <h1 v-if="!props.data.width" class="post__title">{{ props.data.title }}</h1>
+  <img class="post__image" :src="props.data.thumbnail" alt="" />
+  <h1 v-if="props.data.width" class="post__caption">{{ caption }}</h1>
+  <div class="post__text" v-html="props.data.description" />
   <div v-if="props.data.images" v-for="img in props.data.images">
-    <img style="width: 500px" :src="img.url" alt="" />
+    <img class="post__image" :src="img.url" alt="" />
   </div>
 </template>
 

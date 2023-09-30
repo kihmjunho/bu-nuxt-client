@@ -21,6 +21,8 @@ export interface ContentDetail {
   images: {
     url: string;
   }[];
+  userId: string;
+  metaDescription?: string;
 }
 
 export interface Contents {
