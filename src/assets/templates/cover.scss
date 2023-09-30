@@ -67,6 +67,8 @@
 
 @media screen and (max-width: 800px) {
   .cover__slogan {
+    width: calc(100% - 32px);
+
     & > div {
       &:first-child {
         font-size: calc(72px * 0.7);
