@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <h1 class="header__title">
-      <NuxtLink class="header__link" @click="closeDrawer" to="/">
+      <NuxtLink class="header__link spacing" @click="closeDrawer" to="/">
         BODY UNDEFINED
       </NuxtLink>
     </h1>
