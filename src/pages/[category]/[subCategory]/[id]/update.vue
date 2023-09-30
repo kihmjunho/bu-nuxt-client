@@ -27,14 +27,14 @@ onMounted(async () => {
   const fetchCategories = await fetchSubCategories(category);
   categories.value = fetchCategories;
 
-  const { fetchContentById } = useFetchContent(api);
-  const fetchData = await fetchContentById(category, id);
+  const { fetchById } = useFetchBy(api);
+  const fetchData = await fetchById(category, id);
   post.value = fetchData;
 });
 
 const { push } = useRouter();
 
-const { updateContent } = useUpdateContent(api);
+const { updateContent } = useContent(api);
 const updateEvent = async (body: any) => {
   await updateContent(category, id, body);
   push(`/${category}/${subCategory}/${id}`);

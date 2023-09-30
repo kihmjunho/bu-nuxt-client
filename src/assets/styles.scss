@@ -1,4 +1,4 @@
-@import 'header';
+@import './templates/header';
 @import './templates/cover';
 @import 'main';
 @import 'section';
@@ -27,6 +27,11 @@ ul {
 }
 
 img {
-  // display: block;
+  display: block;
   width: 100%;
+}
+
+button {
+  background: none;
+  border: none;
 }

@@ -1,7 +1,7 @@
 import { type Contents } from '@/types/types';
 
-export const useFetchContent = (api: string) => {
-  async function fetchContentByCategory(
+export const useFetchBy = (api: string) => {
+  async function fetchByCategory(
     name: string,
     limit: number,
     page: number
@@ -10,7 +10,7 @@ export const useFetchContent = (api: string) => {
     return await $fetch(url);
   }
 
-  async function fetchContentBySubCategory(
+  async function fetchBySubCategory(
     name: string,
     limit: number,
     page: number
@@ -19,14 +19,14 @@ export const useFetchContent = (api: string) => {
     return await $fetch(url);
   }
 
-  async function fetchContentById(category: string, id: string) {
+  async function fetchById(category: string, id: string) {
     const url = `${api}creations/${category}s/${id}`;
     return await $fetch(url);
   }
 
   return {
-    fetchContentByCategory,
-    fetchContentBySubCategory,
-    fetchContentById,
+    fetchByCategory,
+    fetchBySubCategory,
+    fetchById,
   };
 };

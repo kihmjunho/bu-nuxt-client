@@ -16,7 +16,10 @@
 import { Content } from '@/types/types';
 
 const props = defineProps({
-  data: { type: Object as () => Content, required: true },
+  data: {
+    type: Object as PropType<Content>,
+    required: true,
+  },
 });
 
 const { createUrl } = useCreateString();

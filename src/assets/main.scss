@@ -6,6 +6,7 @@
     margin: 0 auto;
   }
 }
+
 .content-exhibition {
   position: relative;
   width: 560px;
@@ -13,4 +14,13 @@
   border-radius: 16px;
   overflow: hidden;
   background: center/cover no-repeat;
+}
+
+@media screen and (max-width: 1216px) {
+
+  .main{
+    &> .inner{
+      width: 100%;
+    }
+  }
 }

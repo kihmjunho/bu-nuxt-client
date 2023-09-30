@@ -28,7 +28,7 @@ onMounted(async () => {
 });
 
 const createEvent = async (body: any) => {
-  const { createContent } = useCreateContent(api);
+  const { createContent } = useContent(api);
   const category = categories.value.find(
     (item) => item.id === body.emitData.subCategoryId
   );

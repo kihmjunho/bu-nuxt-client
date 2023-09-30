@@ -1,103 +1,99 @@
 .cover {
-    position: relative;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  margin-bottom: 64px;
+  background: center/cover no-repeat;
+
+  &:before {
+    content: '';
+    display: block;
     width: 100%;
-    height: 100vh;
-    margin-bottom: 64px;
-    background: center/cover no-repeat;
-  
-    &:before {
-      content: '';
-      display: block;
-      width: 100%;
-      height: 40vh;
-      background: linear-gradient(#000, transparent 100%);
-      position: absolute;
-      left: 0;
-      top: 0;
+    height: 40vh;
+    background: linear-gradient(#000, transparent 100%);
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  &:after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 65vh;
+    background: linear-gradient(transparent, #000 100%);
+    position: absolute;
+    left: 0;
+    top: 35vh;
+    // z-index: -1;
+  }
+
+  &__slogan {
+    position: absolute;
+    width: 1152px;
+    left: 0;
+    right: 0;
+    bottom: 20vh;
+    margin: auto;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+    letter-spacing: -1.75px;
+
+    & > div {
+      &:first-child {
+        font-size: 72px;
+      }
+
+      &:last-child {
+        font-size: 48px;
+        margin-left: 5px;
+      }
+
+      & > span {
+        position: relative;
+        left: -2px;
+      }
     }
-  
-    &:after {
-      content: '';
-      display: block;
-      width: 100%;
-      height: 65vh;
-      background: linear-gradient(transparent, #000 100%);
-      position: absolute;
-      left: 0;
-      top: 35vh;
+  }
+}
+
+@media screen and (max-width: 1216px) {
+  .cover__slogan {
+    width: calc(100% - 5vw);
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .cover {
+    &__title {
+      left: 2.5vw;
+      // position: relative;
+      // width: 100%;
+      padding: 5px;
+      // z-index: 1;
+      line-height: 40px;
+
+      .key {
+        font-size: 32px;
+      }
+
+      .more {
+        font-size: 20px;
+      }
     }
-  
-    &__image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      position: absolute;
-      z-index: -1;
-    }
-  
-    & > .inner {
-      width: 1152px;
-      z-index: 1;
-      height: 100vh;
-      margin: auto;
-    }
-  
+
     &__message {
-      position: absolute;
-      bottom: 20vh;
-      line-height: 1.4;
-  
       & > .letters {
         &__big {
-          font-size: 72px;
-        }
-  
-        &__small {
-          font-size: 48px;
-          margin-left: 5px;
-        }
-      }
-    }
-  }
-  
-  @media screen and (max-width: 1216px) {
-    .cover {
-      & > .inner {
-        width: calc(100% - 5vw);
-      }
-    }
-  }
-  
-  @media screen and (max-width: 800px) {
-    .cover {
-      &__title {
-        left: 2.5vw;
-        // position: relative;
-        // width: 100%;
-        padding: 5px;
-        // z-index: 1;
-        line-height: 40px;
-  
-        .key {
           font-size: 32px;
         }
-  
-        .more {
+
+        &__small {
           font-size: 20px;
         }
       }
-  
-      &__message {
-        & > .letters {
-          &__big {
-            font-size: 32px;
-          }
-  
-          &__small {
-            font-size: 20px;
-          }
-        }
-      }
     }
   }
-  
+}

@@ -28,7 +28,7 @@ onMounted(async () => {
   categories.value = data;
 });
 
-const { createContent } = useCreateContent(api);
+const { createContent } = useContent(api);
 
 const createEvent = async (body: any) => {
   const category = categories.value.find(

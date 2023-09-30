@@ -1,5 +1,4 @@
 <template>
-  <!-- <ClientOnly> -->
   <Section>
     <SectionTitle>create artwork</SectionTitle>
     <CreateContent
@@ -8,7 +7,6 @@
       @emitUpload="createEvent"
     />
   </Section>
-  <!-- </ClientOnly> -->
 </template>
 
 <script setup lang="ts">
@@ -26,7 +24,7 @@ onMounted(async () => {
   categories.value = data;
 });
 
-const { createContent } = useCreateContent(api);
+const { createContent } = useContent(api);
 const createEvent = async (body: any) => {
   const category = categories.value.find(
     (item) => item.id === body.emitData.subCategoryId

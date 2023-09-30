@@ -1,9 +1,12 @@
 <template>
   <Head>
-    <Title>Login</Title>
+    <Title>Signup</Title>
     <Meta name="description" content="Signup page of body undefined" />
     <Meta property="og:description" content="Signup page of body undefined" />
-    <!-- <Meta property="og:image" :content="`${api}static/cover.jpg`" /> -->
+    <Meta
+      property="og:image"
+      content="https://buimages.s3.ap-northeast-2.amazonaws.com/cover.jpg"
+    />
   </Head>
 
   <Section>

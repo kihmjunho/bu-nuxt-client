@@ -1,7 +1,17 @@
 <template>
-  <ContentList :title="title.artwork" :data="artwork" />
-  <ContentList :title="title.exhibition" :data="exhibition" />
-  <ContentList :title="title.post" :data="post" />
+  <Head>
+    <Title>BODY UNDEFINED</Title>
+    <Meta name="description" content="Try something I have never done" />
+    <Meta property="og:description" content="Try something I have never done" />
+    <Meta
+      property="og:image"
+      content="https://buimages.s3.ap-northeast-2.amazonaws.com/cover.jpg"
+    />
+  </Head>
+
+  <ContentList :title="title.artwork" :data="list.artwork" />
+  <ContentList :title="title.exhibition" :data="list.exhibition" />
+  <ContentList :title="title.post" :data="list.post" />
 </template>
 
 <script setup lang="ts">
@@ -15,27 +25,25 @@ const title = {
   post: 'recently post',
 };
 
-const artwork = ref<Content[]>([]);
-const exhibition = ref<Content[]>([]);
-const post = ref<Content[]>([]);
+const list = reactive({
+  artwork: [] as Content[],
+  exhibition: [] as Content[],
+  post: [] as Content[],
+});
 
 onMounted(async () => {
   const limit = 6;
   const page = 1;
 
-  const { fetchContentByCategory } = useFetchContent(api);
+  const { fetchByCategory } = useFetchBy(api);
 
-  const artworkData: any = await fetchContentByCategory('artwork', limit, page);
-  artwork.value = artworkData.data;
+  const artwork: Contents = await fetchByCategory('artwork', limit, page);
+  list.artwork = artwork.data;
 
-  const exhibitionData: Contents = await fetchContentByCategory(
-    'exhibition',
-    4,
-    page
-  );
-  exhibition.value = exhibitionData.data;
+  const exhibition: Contents = await fetchByCategory('exhibition', 4, page);
+  list.exhibition = exhibition.data;
 
-  const postData: Contents = await fetchContentByCategory('post', limit, page);
-  post.value = postData.data;
+  const post: Contents = await fetchByCategory('post', limit, page);
+  list.post = post.data;
 });
 </script>

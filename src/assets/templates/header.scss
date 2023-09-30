@@ -1,0 +1,101 @@
+.header {
+  height: 48px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+
+  &__title,
+  .list--content,
+  .list--control {
+    position: absolute;
+    bottom: 0;
+    height: fit-content;
+    margin: auto;
+  }
+
+  &__title {
+    top: 4.5px;
+    left: 32px;
+  }
+
+  .list--content,
+  .list--control {
+    display: flex;
+    gap: 32px;
+  }
+
+  .list--content {
+    width: fit-content;
+    left: 0;
+    right: 0;
+  }
+
+  .list--control {
+    right: 32px;
+  }
+
+  &__button {
+    display: none;
+  }
+
+  &__nav {
+    a {
+      font-size: 24px;
+      text-transform: uppercase;
+      padding: 8px 0;
+    }
+  }
+
+  &__bg {
+    height: 48px;
+    background: #000;
+    border-bottom: 1px solid #999;
+  }
+}
+
+@media screen and (max-width: 1216px) {
+  .header {
+    &__title {
+      left: 16px;
+    }
+
+    &__button {
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 16px;
+      bottom: 0;
+      height: fit-content;
+      margin: auto;
+      z-index: 11;
+      transition: 0.3s;
+
+      &.reverse {
+        transform: rotate(180deg);
+      }
+    }
+
+    &__nav {
+      position: relative;
+      background: #000;
+      width: 100%;
+      height: 100vh;
+      z-index: 3;
+      top: -100vh;
+      transition: 0.5s;
+
+      &.active {
+        top: 0;
+      }
+    }
+    .list--content,
+    .list--control {
+      position: relative;
+      width: 100%;
+      left: 0;
+      display: block;
+    }
+  }
+}

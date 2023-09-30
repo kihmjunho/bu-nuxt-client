@@ -27,8 +27,8 @@ onMounted(async () => {
   const data: Category[] = await fetchSubCategories(category);
   categories.value = data;
 
-  const { fetchContentBySubCategory } = useFetchContent(api);
-  const items: any = await fetchContentBySubCategory(subCategory, limit, page);
+  const { fetchBySubCategory } = useFetchBy(api);
+  const items: Contents = await fetchBySubCategory(subCategory, limit, page);
   list.value = items.data;
 });
 

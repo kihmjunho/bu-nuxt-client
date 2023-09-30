@@ -1,7 +1,7 @@
 <template>
   <AppHeader :categories="categories" :user="user" :isLogin="isLogin" />
 
-  <AppCover v-if="useRoute().name === 'index'" />
+  <AppCover v-if="useRoute().name === 'index'" :slogan="slogan" />
   <div v-else class="header__bg" />
 
   <div class="main">
@@ -20,10 +20,14 @@ const user = {
   before: ['login', 'signup'],
   after: ['create', 'my page', 'logout'],
 };
+const slogan = `
+  <div>T<span>r</span>y something</div>
+  <div>I have never done</div>
+`;
 
-const categories = ref([] as Category[]);
+const categories = ref<Category[]>([]);
 onMounted(async () => {
-  const { fetchMainCategories } = await useFetchCategories(api);
+  const { fetchMainCategories } = useFetchCategories(api);
   const data: Category[] = await fetchMainCategories();
   categories.value = data;
 });
