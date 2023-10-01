@@ -1,27 +1,27 @@
 <template>
-  <ul class="post-control">
-    <li class="post-control__item">
+  <ul class="post__control">
+    <li class="post__control-item">
       <NuxtLink
-        class="post-control__link"
+        class="post__control-link"
         :to="`/${category}/${subCategory}/${id}/update`"
       >
-        수정
+        UPDATE
       </NuxtLink>
     </li>
-    <li class="post-control__item">
+    <li class="post__control-item">
       <NuxtLink
-        class="post-control__link"
+        class="post__control-link"
         :to="`/${category}/${subCategory}/${id}/images`"
       >
-        이미지 수정
+        IMAGES
       </NuxtLink>
     </li>
-    <li class="post-control__item">
+    <li class="post__control-item">
       <NuxtLink
-        class="post-control__link"
+        class="post__control-link"
         :to="`/${category}/${subCategory}/${id}/delete`"
       >
-        삭제
+        DELETE
       </NuxtLink>
     </li>
   </ul>

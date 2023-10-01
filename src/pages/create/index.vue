@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul class="header__list list--control">
+    <ul>
       <li>
         <NuxtLink to="/create/artwork">Artwork</NuxtLink>
       </li>

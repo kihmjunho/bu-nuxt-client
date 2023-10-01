@@ -49,4 +49,12 @@ const computedUrl = (item: string) => {
     }
   }
 }
+
+@media screen and (max-width: 640px) {
+  .section {
+    &__tab {
+      padding: 0 16px;
+    }
+  }
+}
 </style>

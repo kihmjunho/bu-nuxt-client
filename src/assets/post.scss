@@ -37,7 +37,7 @@
 
     &-form,
     &-textarea {
-      width: 756px;
+      width: 100%;
     }
 
     &-form {
@@ -60,7 +60,7 @@
     }
 
     &-item {
-      background: #111;
+      background: #222;
       margin-bottom: 16px;
       padding: 8px;
     }
@@ -68,10 +68,34 @@
     &-header {
       display: flex;
       justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    &-information {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    &-date {
+      font-size: 80%;
     }
 
     &-button {
       color: #fff;
+    }
+
+    &-control{
+      display: flex;
+      gap: 16px;
+    }
+
+    &-text{
+      margin-bottom: 12px;
+    }
+    
+    &-body{
+      margin-bottom: 16px;
     }
   }
 }

@@ -59,16 +59,14 @@
   }
 }
 
-@media screen and (max-width: 1216px) {
+@media screen and (max-width: 1184px) {
   .cover__slogan {
-    width: calc(100% - 5vw);
+    width: calc(100% - 32px);
   }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 640px) {
   .cover__slogan {
-    width: calc(100% - 32px);
-
     & > div {
       &:first-child {
         font-size: calc(72px * 0.7);
@@ -79,7 +77,7 @@
       }
 
       & > span {
-        left: calc(-2px * 0.7);
+        left: calc(3px * 0.7);
       }
     }
   }
