@@ -17,7 +17,7 @@
         :id="id"
       />
 
-      <!-- <div class="post__comment">
+      <div class="post__comment">
         <PostCommentForm v-if="isLogin" @emitCreate="createComment" />
 
         <PostCommentList>
@@ -30,7 +30,7 @@
             @emitReply="createReply"
           />
         </PostCommentList>
-      </div> -->
+      </div>
     </div>
   </template>
 </template>

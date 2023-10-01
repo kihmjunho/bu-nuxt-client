@@ -40,23 +40,38 @@
       width: 756px;
     }
 
-    &-textarea {
-      height: 64px;
+    &-form {
+      margin-bottom: 48px;
     }
 
-    &-button {
+    &-textarea {
+      background: #000;
+      margin-bottom: 16px;
+      height: 100px;
+      color: #fff;
+    }
+
+    &-submit {
       width: 100%;
       padding: 8px;
+      border: 1px solid #fff;
+      text-transform: uppercase;
+      color: #fff;
     }
 
     &-item {
-      background: #333;
+      background: #111;
       margin-bottom: 16px;
       padding: 8px;
     }
+
     &-header {
       display: flex;
       justify-content: space-between;
+    }
+
+    &-button {
+      color: #fff;
     }
   }
 }
@@ -79,6 +94,16 @@
       width: 100%;
       height: auto;
       margin-bottom: 32px;
+    }
+
+    &__comment {
+      width: 100%;
+      padding: 0 16px;
+
+      &-form,
+      &-textarea {
+        width: 100%;
+      }
     }
   }
 }

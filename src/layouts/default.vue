@@ -21,7 +21,7 @@ const user = {
   after: ['create', 'my page', 'logout'],
 };
 const slogan = `
-  <div>T<span>r</span>y something</div>
+  <div>Tr<span>y</span> something</div>
   <div>I have never done</div>
 `;
 

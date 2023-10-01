@@ -15,7 +15,7 @@
   .section__title {
     font-size: 40px;
     line-height: 1.2;
-    padding: 0 2.5vw;
+    padding: 0 16px;
     margin-bottom: 20px;
   }
 }

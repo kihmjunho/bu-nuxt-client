@@ -1,7 +1,7 @@
 <template>
   <form class="post__comment-form" @submit.prevent="createComment">
     <textarea class="post__comment-textarea" v-model="comment" />
-    <button class="post__comment-button" type="submit">add comment</button>
+    <button class="post__comment-submit" type="submit">add comment</button>
   </form>
 </template>
 

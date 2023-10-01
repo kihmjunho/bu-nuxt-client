@@ -16,13 +16,14 @@
   background: center/cover no-repeat;
 }
 
-@media screen and (max-width: 1216px) {
+@media screen and (max-width: 1184px) {
   .main {
     & > .inner {
       width: calc(100% - 32px);
     }
   }
 }
+
 @media screen and (max-width: 756px) {
   .main {
     & > .inner {

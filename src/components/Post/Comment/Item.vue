@@ -2,24 +2,29 @@
   <li class="post__comment-item">
     <div class="post__comment-header">
       <div class="post__comment-information">
-        {{ props.data.nickname }} | {{ props.data.createdAt }}
+        {{ props.data.nickname }} |
+        {{ dayjs(props.data.createdAt).format('YYYY. MM. DD') }}
       </div>
       <div v-if="props.data.userId === props.userId">
-        <button @click="showForm">update</button>
+        <button class="post__comment-button" @click="showForm">update</button>
       </div>
     </div>
     <div v-if="showComment">
-      <p v-html="props.data.comment" />
+      <div v-html="props.data.comment" />
 
-      <button @click="showReply">reply</button>
+      <button class="post__comment-button" @click="showReply">reply</button>
     </div>
-    <form v-else class="message__form" @submit.prevent="updateComment">
-      <textarea class="message__textarea" v-model="comment" />
-      <button class="message__button" type="submit">update comment</button>
+    <form v-else class="post__comment-form" @submit.prevent="updateComment">
+      <textarea class="post__comment-textarea" v-model="comment" />
+      <button class="post__comment-submit" type="submit">update comment</button>
     </form>
-    <form v-if="replyForm" @submit.prevent="createReply">
-      <textarea class="message__textarea" v-model="reply" />
-      <button class="message__button" type="submit">create reply</button>
+    <form
+      v-if="replyForm"
+      class="post__comment-form"
+      @submit.prevent="createReply"
+    >
+      <textarea class="post__comment-textarea" v-model="reply" />
+      <button class="post__comment-submit" type="submit">create reply</button>
     </form>
     <ul>
       <PostCommentReply
@@ -33,6 +38,8 @@
 </template>
 
 <script setup lang="ts">
+import dayjs from 'dayjs';
+
 const showComment = ref(true);
 const replyForm = ref(false);
 const comment = ref('');
