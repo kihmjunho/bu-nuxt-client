@@ -3,15 +3,15 @@
     <div class="post__comment-header">
       <div class="post__comment-information">
         <div class="post__comment-writer">
-          {{ props.data.nickname }}
+          {{ props.data.user.nickname }}
         </div>
-       <div class="post__comment-date">
-        {{ dayjs(props.data.createdAt).format('YYYY. MM. DD.') }}
-       </div>
+        <div class="post__comment-date">
+          {{ dayjs(props.data.createdAt).format('YYYY. MM. DD.') }}
+        </div>
       </div>
       <div
         class="post__comment-control"
-        v-if="props.data.userId === props.userId"
+        v-if="props.data.user.id === props.userId"
       >
         <button class="post__comment-button" @click="showForm">UPDATE</button>
         <button class="post__comment-button" @click="showForm">DELETE</button>
@@ -37,7 +37,7 @@
     <ul>
       <PostCommentReply
         style="padding-left: 48px"
-        v-for="item in props.data.replies"
+        v-for="item in props.data.children"
         :key="item.id"
         :data="item"
         :userId="userId"

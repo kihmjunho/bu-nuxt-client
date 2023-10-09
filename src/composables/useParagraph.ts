@@ -1,10 +1,16 @@
-export const useParagraph = (data: string) => {
-  const origin = data.split(/\r?\n/);
+export const useParagraph = () => {
+  function wrapTextInPTag(data: string) {
+    const origin = data.split(/\r?\n/);
 
-  let array: string[] = [];
-  origin.forEach((item) => array.push(`<p>${item}</p>`));
+    let array: string[] = [];
+    origin.forEach((item) => array.push(`<p>${item}</p>`));
 
-  const paragraph = array.join('');
+    return array.join('');
+  }
 
-  return { paragraph };
+  function removePTagsFromHTML(data: string) {
+    return data.replace(/<p>/gi, '').replace(/<\/p>/gi, '\n').trim();
+  }
+
+  return { wrapTextInPTag, removePTagsFromHTML };
 };

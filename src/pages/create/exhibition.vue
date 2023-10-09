@@ -1,14 +1,12 @@
 <template>
-  <ClientOnly>
-    <!-- <SectionBox> -->
-    <!-- <SectionTitle>create post</SectionTitle> -->
-    <CreateContent
+  <Section>
+    <SectionTitle>create exhibition</SectionTitle>
+    <CreateExhibition
       :type="exhibition"
       :categories="categories"
-      @emitUpload="createEvent"
+      @emitExhibitionData="createEvent"
     />
-    <!-- </SectionBox> -->
-  </ClientOnly>
+  </Section>
 </template>
 
 <script setup lang="ts">
@@ -28,15 +26,21 @@ onMounted(async () => {
   categories.value = data;
 });
 
-const { createContent } = useContent(api);
+const { sendImageFiles, createContent, getSubCategoryName } = useContent(api);
 
 const createEvent = async (body: any) => {
-  const category = categories.value.find(
-    (item) => item.id === body.emitData.subCategoryId
-  );
-  const path = category ? category.name : undefined;
+  const { formData, exhibitionData } = body;
 
-  const response: CreateResponse = await createContent(exhibition, body);
+  await sendImageFiles(formData);
+  const path = getSubCategoryName(
+    categories.value,
+    exhibitionData.subCategoryId
+  );
+
+  const response: CreateResponse = await createContent(
+    exhibition,
+    exhibitionData
+  );
   push(`/exhibition/${path}/${response.id}`);
 };
 </script>

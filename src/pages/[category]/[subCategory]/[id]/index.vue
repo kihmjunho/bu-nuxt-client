@@ -59,11 +59,11 @@ const { data: item } = useAsyncData<ContentDetail>('item', async () => {
 
 const metaDescription = computed(() => {
   if (item.value && category === 'artwork') {
-    return `Artwork Introduction for ${item.value.title}`;
+    return `Artwork for ${item.value.title}`;
   }
 
   if (item.value && category === 'exhibition') {
-    return `Exhibition Introduction for ${item.value.title}`;
+    return `Exhibition for ${item.value.title}`;
   }
 
   if (item.value && category === 'post') {
@@ -73,7 +73,7 @@ const metaDescription = computed(() => {
 
 const comments = ref<any>([]);
 const getComments = async () => {
-  const response = await $fetch(`${api}comment/${id}`);
+  const response = await $fetch(`${api}comments?content-id=${id}`);
   comments.value = response;
 };
 
@@ -82,11 +82,15 @@ onMounted(() => {
 });
 
 const createComment = async (comment: any) => {
-  await $fetch(`${api}comment/${id}`, {
+  await $fetch(`${api}comments`, {
     method: 'post',
     body: {
       comment: comment,
       userId: useCookie('buUserId').value,
+      contentId: id,
+    },
+    headers: {
+      Authorization: `Bearer ${useCookie('buToken').value}` || '',
     },
   });
 
@@ -106,12 +110,13 @@ const updateComment = async (data: any) => {
 };
 
 const createReply = async (data: any) => {
-  await $fetch(`${api}comment/${id}/reply`, {
+  await $fetch(`${api}comments`, {
     method: 'post',
     body: {
-      reply: data.paragraph,
-      commentId: data.id,
+      comment: data.paragraph,
+      commentParentId: data.id,
       userId: useCookie('buUserId').value,
+      contentId: id,
     },
   });
   getComments();

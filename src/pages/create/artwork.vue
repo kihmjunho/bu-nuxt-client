@@ -1,10 +1,9 @@
 <template>
   <Section>
     <SectionTitle>create artwork</SectionTitle>
-    <CreateContent
-      :type="artwork"
+    <CreateArtwork
       :categories="categories"
-      @emitUpload="createEvent"
+      @emitArtworkData="createEvent"
     />
   </Section>
 </template>
@@ -24,14 +23,15 @@ onMounted(async () => {
   categories.value = data;
 });
 
-const { createContent } = useContent(api);
-const createEvent = async (body: any) => {
-  const category = categories.value.find(
-    (item) => item.id === body.emitData.subCategoryId
-  );
-  const path = category ? category.name : undefined;
+const { sendImageFiles, createContent, getSubCategoryName } = useContent(api);
 
-  const response: CreateResponse = await createContent(artwork, body);
+const createEvent = async (body: any) => {
+  const { formData, artworkData } = body;
+
+  await sendImageFiles(formData);
+  const path = getSubCategoryName(categories.value, artworkData.subCategoryId);
+
+  const response: CreateResponse = await createContent(artwork, artworkData);
   push(`/artwork/${path}/${response.id}`);
 };
 </script>

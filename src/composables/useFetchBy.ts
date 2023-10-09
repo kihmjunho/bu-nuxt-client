@@ -24,9 +24,15 @@ export const useFetchBy = (api: string) => {
     return await $fetch(url);
   }
 
+  async function fetchExhibitionsBy(name: string) {
+    const url = `${api}creations/exhibitions?category-name=${name}`;
+    return await $fetch(url);
+  }
+
   return {
     fetchByCategory,
     fetchBySubCategory,
     fetchById,
+    fetchExhibitionsBy,
   };
 };

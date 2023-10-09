@@ -35,12 +35,12 @@ onMounted(async () => {
   const limit = 6;
   const page = 1;
 
-  const { fetchByCategory } = useFetchBy(api);
+  const { fetchByCategory, fetchBySubCategory } = useFetchBy(api);
 
   const artwork: Contents = await fetchByCategory('artwork', limit, page);
   list.artwork = artwork.data;
 
-  const exhibition: Contents = await fetchByCategory('exhibition', 4, page);
+  const exhibition: Contents = await fetchBySubCategory('solo', 4, page);
   list.exhibition = exhibition.data;
 
   const post: Contents = await fetchByCategory('post', limit, page);

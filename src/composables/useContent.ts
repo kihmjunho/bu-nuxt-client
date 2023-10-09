@@ -1,19 +1,30 @@
-import { CreateResponse } from '@/types/types';
+import { Category, CreateResponse } from '@/types/types';
 
 export const useContent = (api: string) => {
+  let imagePaths: string[] = [];
+
+  async function sendImageFiles(body: any): Promise<void> {
+    const response: string[] = await $fetch(`${api}upload`, {
+      method: 'post',
+      body,
+    });
+
+    imagePaths = response;
+    return;
+  }
+
   async function createContent(
     type: string,
     body: any
   ): Promise<CreateResponse> {
-    const imagesData: string[] = await $fetch(`${api}upload`, {
-      method: 'post',
-      body: body.formData,
-    });
+    body.images = imagePaths;
 
-    body.emitData.images = imagesData;
     return await $fetch(`${api}creations/${type}s`, {
       method: 'post',
-      body: body.emitData,
+      body,
+      headers: {
+        Authorization: `Bearer ${useCookie('buToken').value}` || '',
+      },
     });
   }
 
@@ -35,5 +46,12 @@ export const useContent = (api: string) => {
     });
   }
 
-  return { createContent, updateContent, deleteContent };
+  function getSubCategoryName(categories: Category[], id: number): string | undefined {
+    const category = categories.find((item: Category) => item.id === id);
+    if (category) {
+      return category.name;
+    }
+  }
+
+  return { sendImageFiles, createContent, updateContent, deleteContent, getSubCategoryName };
 };
