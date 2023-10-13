@@ -1,3 +1,4 @@
+import { values } from 'lodash'; import { identity } from 'lodash';
 <template>
   <li class="post__comment-item">
     <div class="post__comment-header">
@@ -20,12 +21,12 @@
       </div>
     </div>
     <div class="post__comment-body" v-if="showComment">
-      <div class="post__comment-text" v-html="props.data.comment" />
+      <div class="post__comment-text" v-html="props.data.message" />
 
       <button class="post__comment-button" @click="showReply">reply</button>
     </div>
     <form v-else class="post__comment-form" @submit.prevent="updateComment">
-      <textarea class="post__comment-textarea" v-model="comment" />
+      <textarea class="post__comment-textarea" v-model="guestMessage" />
       <button class="post__comment-submit" type="submit">update comment</button>
     </form>
     <form
@@ -33,11 +34,11 @@
       class="post__comment-form"
       @submit.prevent="replyEvent"
     >
-      <textarea class="post__comment-textarea" v-model="reply" />
+      <textarea class="post__comment-textarea" v-model="guestMessage" />
       <button class="post__comment-submit" type="submit">create reply</button>
     </form>
     <ul>
-      <PostCommentReply
+      <GuestbookReply
         style="padding-left: 48px"
         v-for="item in props.data.children"
         :key="item.id"
@@ -55,7 +56,7 @@ import dayjs from 'dayjs';
 
 const showComment = ref(true);
 const replyForm = ref(false);
-const comment = ref('');
+const guestMessage = ref('');
 const reply = ref('');
 
 const props = defineProps({
@@ -66,7 +67,7 @@ const { wrapTextInPTag, removePTagsFromHTML } = useParagraph();
 
 const showForm = () => {
   showComment.value = !showComment.value;
-  comment.value = removePTagsFromHTML(props.data.comment);
+  guestMessage.value = removePTagsFromHTML(props.data.message);
 };
 
 const showReply = () => {
@@ -74,7 +75,7 @@ const showReply = () => {
 };
 
 const emit = defineEmits([
-  'emitCreate',
+  'emitUpdate',
   'submitReply',
   'emitUpdateReply',
   'emitDeleteComment',
@@ -82,28 +83,29 @@ const emit = defineEmits([
 ]);
 
 const updateComment = () => {
-  const paragraph = wrapTextInPTag(comment.value);
-  emit('emitCreate', { paragraph, id: props.data.id });
-  comment.value = '';
+  const message = wrapTextInPTag(guestMessage.value);
+  emit('emitUpdate', { message, id: props.data.id });
+  guestMessage.value = '';
   showComment.value = !showComment.value;
 };
 
 const deleteComment = () => {
   emit('emitDeleteComment', props.data.id);
 };
-const updateReply = (message: any) => {
+
+const updateReply = (message: string) => {
   emit('emitUpdateReply', message);
 };
 
-const deleteReply = (id: any) => {
-  console.log(id);
-  emit('emitDeleteReply', id);
+const deleteReply = (id: string) => {
+  emit('emitDeleteComment', id);
 };
+
 const replyEvent = () => {
   const { id } = props.data;
-  const paragraph = wrapTextInPTag(reply.value);
-  emit('submitReply', { id, paragraph });
+  const message = wrapTextInPTag(guestMessage.value);
+  emit('emitReply', { messageParentId: id, message });
   replyForm.value = false;
-  reply.value = '';
+  guestMessage.value = '';
 };
 </script>

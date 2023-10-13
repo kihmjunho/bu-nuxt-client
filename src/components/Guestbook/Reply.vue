@@ -21,7 +21,7 @@
     </div>
 
     <div class="post__comment-body">
-      <div class="post__comment-text" v-html="props.data.comment" />
+      <div class="post__comment-text" v-html="props.data.message" />
     </div>
   </li>
   <form v-else class="post__comment-form" @submit.prevent="updateReply">
@@ -46,13 +46,13 @@ const emit = defineEmits(['emitUpdateReply', 'emitDeleteReply']);
 const { wrapTextInPTag, removePTagsFromHTML } = useParagraph();
 
 const showForm = () => {
-  reply.value = removePTagsFromHTML(props.data.comment);
+  reply.value = removePTagsFromHTML(props.data.message);
   showReply.value = false;
 };
 
 const updateReply = () => {
   const paragraph = wrapTextInPTag(reply.value);
-  emit('emitUpdateReply', { paragraph, id: props.data.id });
+  emit('emitUpdateReply', { message: paragraph, id: props.data.id });
   showReply.value = true;
 };
 

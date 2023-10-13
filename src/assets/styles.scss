@@ -4,7 +4,26 @@
 
 @import './templates/header';
 @import './templates/cover';
+
+@import './components/cv';
+@import './components/post';
+
 @import 'main';
 @import 'section';
 @import 'form';
-@import 'post';
+
+.guest {
+  width: 50vw;
+  margin: auto;
+}
+
+@media screen and (max-width: 1200px) {
+  .guest {
+    width: 80vw;
+  }
+}
+@media screen and (max-width: 480px) {
+  .guest {
+    width: calc(100% - 32px);
+  }
+}

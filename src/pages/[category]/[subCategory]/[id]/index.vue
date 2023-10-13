@@ -1,24 +1,24 @@
 <template>
-  <template v-if="item">
+  <template v-if="post">
     <Head>
-      <Title>{{ item.title }}</Title>
+      <Title>{{ post.title }}</Title>
       <Meta name="description" :content="metaDescription" />
       <Meta property="og:description" :content="metaDescription" />
-      <Meta property="og:image" :content="item.thumbnail" />
+      <Meta property="og:image" :content="post.thumbnail" />
     </Head>
 
     <div class="post">
-      <PostDetail :data="item" />
+      <PostDetail :data="post" />
 
       <PostControl
-        v-if="item.userId === userId"
+        v-if="post.userId === userId"
         :category="category"
         :subCategory="subCategory"
         :id="id"
       />
 
       <div class="post__comment">
-        <PostCommentForm v-if="isLogin" @emitCreate="createComment" />
+        <PostCommentForm v-if="isLogin" @submitCommentEvent="createComment" />
 
         <PostCommentList>
           <PostCommentItem
@@ -28,6 +28,9 @@
             :userId="userId"
             @emitCreate="updateComment"
             @emitReply="createReply"
+            @emitUpdateReply="updateComment"
+            @emitDeleteComment="deleteComment"
+            @emitDeleteReply="deleteComment"
           />
         </PostCommentList>
       </div>
@@ -49,7 +52,7 @@ const { isLogin, userId } = storeToRefs(userStore);
 const params = useRoute().params as unknown;
 const { category, subCategory, id } = params as Params;
 
-const { data: item } = useAsyncData<ContentDetail>('item', async () => {
+const { data: post } = useAsyncData<ContentDetail>('post', async () => {
   return await $fetch(`${api}creations/${category}s/${id}`, {
     headers: {
       authentication: useCookie('buToken').value || '',
@@ -58,16 +61,16 @@ const { data: item } = useAsyncData<ContentDetail>('item', async () => {
 });
 
 const metaDescription = computed(() => {
-  if (item.value && category === 'artwork') {
-    return `Artwork for ${item.value.title}`;
+  if (post.value && category === 'artwork') {
+    return `Artwork for ${post.value.title}`;
   }
 
-  if (item.value && category === 'exhibition') {
-    return `Exhibition for ${item.value.title}`;
+  if (post.value && category === 'exhibition') {
+    return `Exhibition for ${post.value.title}`;
   }
 
-  if (item.value && category === 'post') {
-    return item.value.metaDescription;
+  if (post.value && category === 'post') {
+    return post.value.metaDescription;
   }
 });
 
@@ -77,16 +80,13 @@ const getComments = async () => {
   comments.value = response;
 };
 
-onMounted(() => {
-  getComments();
-});
+onMounted(() => getComments());
 
 const createComment = async (comment: any) => {
   await $fetch(`${api}comments`, {
     method: 'post',
     body: {
       comment: comment,
-      userId: useCookie('buUserId').value,
       contentId: id,
     },
     headers: {
@@ -98,15 +98,16 @@ const createComment = async (comment: any) => {
 };
 
 const updateComment = async (data: any) => {
-  console.log(data);
+  const { id: commentId, paragraph } = data;
+  await $fetch(`${api}comments`, {
+    method: 'put',
+    body: { commentId, comment: paragraph },
+    headers: {
+      Authorization: `Bearer ${useCookie('buToken').value}` || '',
+    },
+  });
 
-  //   const { id: commentId, value: comment } = data;
-  //   await $fetch(`${postApi}/comments`, {
-  //     method: 'put',
-  //     body: { commentId, comment },
-  //   });
-
-  //   getComment();
+  getComments();
 };
 
 const createReply = async (data: any) => {
@@ -115,15 +116,24 @@ const createReply = async (data: any) => {
     body: {
       comment: data.paragraph,
       commentParentId: data.id,
-      userId: useCookie('buUserId').value,
       contentId: id,
     },
+    headers: {
+      Authorization: `Bearer ${useCookie('buToken').value}` || '',
+    },
   });
+
   getComments();
 };
-// const deleteComment = async id => {
-//   await $fetch(`${postApi}/comments/${id}`, { method: 'delete' });
 
-//   getComment();
-// };
+const deleteComment = async (id: any) => {
+  await $fetch(`${api}comments/${id}`, {
+    method: 'delete',
+    headers: {
+      Authorization: `Bearer ${useCookie('buToken').value}` || '',
+    },
+  });
+
+  getComments();
+};
 </script>

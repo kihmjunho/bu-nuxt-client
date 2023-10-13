@@ -8,6 +8,10 @@
       content="https://buimages.s3.ap-northeast-2.amazonaws.com/cover.jpg"
     />
   </Head>
+  <Section>
+    <SectionTitle>cv</SectionTitle>
+    <CvContainer :solo="list.solo" :group="list.group" />
+  </Section>
 </template>
 
 <script setup lang="ts">

@@ -19,6 +19,10 @@
     margin-bottom: 24px;
   }
 
+  &__exhibition {
+    margin-bottom: 24px;
+  }
+
   &__text {
     font-size: 20px;
     font-weight: 100;
@@ -68,13 +72,14 @@
     &-header {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 12px;
+      // margin-bottom: 2px;
     }
 
     &-information {
       display: flex;
       align-items: baseline;
       gap: 8px;
+      font-size: 12px;
     }
 
     &-date {
@@ -83,19 +88,21 @@
 
     &-button {
       color: #fff;
+      font-size: 12px;
+      text-decoration: underline;
     }
 
-    &-control{
+    &-control {
       display: flex;
       gap: 16px;
     }
 
-    &-text{
-      margin-bottom: 12px;
+    &-text {
+      margin-bottom: -4px;
     }
-    
-    &-body{
-      margin-bottom: 16px;
+
+    &-body {
+      margin-bottom: 32px;
     }
   }
 }
