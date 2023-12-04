@@ -1,5 +1,10 @@
 <template>
-  <AppHeader :categories="categories" :user="user" :isLogin="isLogin" />
+  <AppHeader
+    :categories="categories"
+    :user="user"
+    :isLogin="isLogin"
+    :isOwner="isOwner"
+  />
 
   <AppCover v-if="useRoute().name === 'index'" :slogan="slogan" />
   <div v-else class="header__bg" />
@@ -9,6 +14,8 @@
       <slot />
     </div>
   </div>
+
+  <AppFooter />
 </template>
 
 <script setup lang="ts">
@@ -20,6 +27,7 @@ const user = {
   before: ['login', 'signup'],
   after: ['create', 'my page', 'logout'],
 };
+
 const slogan = `
   <div>Tr<span>y</span> something</div>
   <div>I have never done</div>

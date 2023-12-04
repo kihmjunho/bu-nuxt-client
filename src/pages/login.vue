@@ -11,23 +11,37 @@
 
   <Section>
     <SectionTitle>login</SectionTitle>
-    <UserLogin @emitLogin="loginEvent" />
+    <UserLogin @emitLogin="loginEvent" :error="renderError" />
   </Section>
 </template>
 
 <script setup lang="ts">
 import { useUserStore } from '@/stores/user';
 
-const { api } = useRuntimeConfig().public;
+import { SubmitUser } from '@/types/types';
 
+const { api } = useRuntimeConfig().public;
 const { push } = useRouter();
 
-const loginEvent = async (body: any) => {
-  const data = await $fetch(`${api}users/login`, { method: 'post', body });
+const { loginUser, getUserData } = useUser(api);
+const renderError = ref('');
 
-  const userStore = useUserStore();
-  userStore.setUser(data);
+const loginEvent = async (body: SubmitUser) => {
+  const { accessToken, errorMessage } = await loginUser(body);
 
-  push('/');
+  if (accessToken) {
+    console.log(accessToken);
+
+    useCookie('buToken').value = accessToken;
+    const data = await getUserData(accessToken);
+
+    const userStore = useUserStore();
+    userStore.setUser(data);
+    push('/');
+  }
+
+  if (errorMessage) {
+    renderError.value = errorMessage;
+  }
 };
 </script>

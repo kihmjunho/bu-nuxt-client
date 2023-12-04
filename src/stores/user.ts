@@ -2,11 +2,13 @@ import { defineStore } from 'pinia';
 
 interface State {
   userId: string;
-  username: string;
+  nickname: string;
+  role: string;
 }
 const state = () => ({
   userId: '',
-  username: '',
+  nickname: '',
+  role: '',
 });
 
 const getters = {
@@ -14,29 +16,34 @@ const getters = {
     return state.userId !== '';
   },
   isOwner(state: State) {
-    return state.username === 'kimjunho';
+    return state.role === 'OWNER';
   },
 };
 
 const actions = {
   setUser(this: State, data: any) {
     this.userId = data.userId;
-    // this.username = data.loginUser.username;
+    this.nickname = data.nickname;
+    this.role = data.role;
 
-    useCookie('buToken').value = data.accessToken;
     useCookie('buUserId').value = data.userId;
-    // useCookie('buUsername').value = data.loginUser.username;
+    useCookie('buNickname').value = data.nickname;
+    useCookie('buRole').value = data.role;
   },
   getCookies(this: State) {
     this.userId = useCookie('buUserId').value || '';
-    // this.username = useCookie('buUsername').value || '';
+    this.nickname = useCookie('buNickname').value || '';
+    this.role = useCookie('buRole').value || '';
   },
   logoutUser(this: State) {
     this.userId = '';
-    this.username = '';
+    this.nickname = '';
+    this.role = '';
 
     useCookie('buToken').value = null;
     useCookie('buUserId').value = null;
+    useCookie('buNickname').value = null;
+    useCookie('buRole').value = null;
   },
 };
 

@@ -1,95 +1,82 @@
 <template>
-  <form class="form form--user">
-    <div class="user-input">
-      <label for="email" hidden>email</label>
-      <input
-        class="form__input"
-        id="email"
-        v-model="email"
-        type="text"
-        placeholder="email"
-      />
-      <button class="check" @click.prevent="checkEvent">CHECK</button>
-    </div>
-
-    <div v-if="result" class="form__message">
-      <div v-if="result && availability">This is an available username.</div>
-      <div v-if="result && !availability">Change it to something else.</div>
-    </div>
+  <form class="form form--user" @submit.prevent="signupEvent">
+    <label for="email" hidden>email</label>
+    <input
+      class="form__input"
+      id="email"
+      v-model="user.email"
+      type="text"
+      placeholder="email"
+      autocomplete="off"
+    />
 
     <label for="password" hidden>pasword</label>
     <input
       class="form__input"
       id="password"
-      v-model="password"
+      v-model="user.password"
       type="password"
+      autocomplete="off"
       placeholder="password"
     />
-    <label for="nickname" hidden>nickname</label>
+
+    <label for="password" hidden>confirm_password</label>
     <input
       class="form__input"
-      id="nickname"
-      v-model="nickname"
-      type="text"
-      placeholder="nickname"
+      id="confirm_pasword"
+      v-model="user.confirmPassword"
+      type="password"
+      autocomplete="off"
+      placeholder="confirm password"
     />
 
-    <button class="form__button" @click.prevent="signupEvent">SIGNUP</button>
+    <div v-if="props.error" class="form__message">
+      {{ props.error }}
+    </div>
+
+    <div v-if="passwordMismatchWarning" class="form__message">
+      The passwords do not match. Please try again.
+    </div>
+
+    <button class="form__button">SIGNUP</button>
   </form>
 </template>
 
 <script setup lang="ts">
-const email = ref('');
-const password = ref('');
-const nickname = ref('');
+const props = defineProps({ error: String });
 
-const props = defineProps({ result: Boolean, availability: Boolean });
+const user = reactive({
+  email: '',
+  password: '',
+  confirmPassword: '',
+});
 
-const emit = defineEmits(['emitCheck', 'emitSignup']);
+const emit = defineEmits<{
+  (e: 'submitUserData', value: any): void;
+  (e: 'clearErrorMessage'): void;
+}>();
 
-const checkEvent = () => {
-  emit('emitCheck', { email: email.value });
-};
+const passwordMismatchWarning = ref(false);
 
 const signupEvent = () => {
-  emit('emitSignup', {
-    email: email.value,
-    password: password.value,
-    nickname: nickname.value,
+  emit('clearErrorMessage');
+
+  if (user.password !== user.confirmPassword) {
+    return (passwordMismatchWarning.value = true);
+  } else {
+    passwordMismatchWarning.value = false;
+  }
+
+  emit('submitUserData', {
+    email: user.email,
+    password: user.password,
+    nickname: user.email.split('@')[0],
   });
 
-  if (email.value && password.value) {
-    email.value = '';
-    password.value = '';
+  if (user.email && user.password) {
+    user.email = '';
+    user.password = '';
+    user.confirmPassword = '';
   }
 };
 </script>
-
-<style lang="scss">
-.user-input {
-  border-bottom: 1px solid #fff;
-  position: relative;
-  margin-bottom: 20px;
-  & > .form__input {
-    border: none;
-    margin: 0;
-    width: calc(100% - 48.94px);
-  }
-  .check {
-    position: absolute;
-    height: fit-content;
-    top: 0;
-    bottom: 0;
-    right: 5px;
-    margin: auto;
-  }
-}
-
-.form__message {
-  position: relative;
-  top: -10px;
-  padding: 5px;
-  margin-bottom: 10px;
-  font-size: 16px;
-}
-</style>

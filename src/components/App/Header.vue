@@ -41,7 +41,7 @@
         <li
           class="header__item"
           v-else
-          v-for="(item, index) in props.user?.after"
+          v-for="(item, index) in computedControl"
           :key="index"
         >
           <NuxtLink :to="generateUrl(item)">{{ item }}</NuxtLink>
@@ -56,6 +56,15 @@ const props = defineProps({
   categories: Object,
   user: Object,
   isLogin: Boolean,
+  isOwner: Boolean,
+});
+
+const computedControl = computed(() => {
+  if (props.isOwner) {
+    return props.user?.after;
+  } else {
+    return props.user?.after.slice(1);
+  }
 });
 
 const drawerState = ref(false);

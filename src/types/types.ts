@@ -35,3 +35,9 @@ export interface Params {
   subCategory: string;
   id: string;
 }
+
+export interface SubmitUser {
+  email: string;
+  password: string;
+  nickname?: string;
+}

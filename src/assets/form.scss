@@ -18,7 +18,7 @@
   &__button {
     color: #fff;
     font-size: 20px;
-    padding: 5px;
+    padding: 6px;
     width: 100%;
   }
 
@@ -53,6 +53,22 @@
     border-radius: 0px;
     background: #000;
     text-transform: uppercase;
+  }
+
+  &__check {
+    display: block;
+    color: #fff;
+    position: relative;
+    margin-left: auto;
+    top: -12px;
+    font-size: 12px;
+  }
+
+  &__message {
+    position: relative;
+    top: -12px;
+    font-size: 14px;
+    padding-left: 6px;
   }
 }
 

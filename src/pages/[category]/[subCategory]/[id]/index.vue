@@ -27,7 +27,7 @@
             :data="item"
             :userId="userId"
             @emitCreate="updateComment"
-            @emitReply="createReply"
+            @submitReply="createReply"
             @emitUpdateReply="updateComment"
             @emitDeleteComment="deleteComment"
             @emitDeleteReply="deleteComment"
@@ -83,7 +83,9 @@ const getComments = async () => {
 onMounted(() => getComments());
 
 const createComment = async (comment: any) => {
-  await $fetch(`${api}comments`, {
+  console.log('hh');
+
+  await useFetch(`${api}comments`, {
     method: 'post',
     body: {
       comment: comment,
@@ -111,6 +113,8 @@ const updateComment = async (data: any) => {
 };
 
 const createReply = async (data: any) => {
+  console.log(data);
+
   await $fetch(`${api}comments`, {
     method: 'post',
     body: {
