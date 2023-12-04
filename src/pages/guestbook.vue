@@ -1,7 +1,7 @@
 <template>
   <Section>
     <SectionTitle>guestbook</SectionTitle>
-    <div class="guest">
+    <!-- <div class="guest">
       <GuestbookForm v-if="isLogin" @submitGuestEvent="createGuestbookEvent" />
 
       <GuestbookList>
@@ -16,7 +16,7 @@
           @emitDeleteComment="deleteGuestbookMessage"
         />
       </GuestbookList>
-    </div>
+    </div> -->
   </Section>
 </template>
 

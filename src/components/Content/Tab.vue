@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { Category } from '@/types/types';
+import type { Category } from '@/types/types';
 
 const props = defineProps({
   data: Array as PropType<Category[]>,

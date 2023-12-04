@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { Content } from '@/types/types';
+import { type Content } from '@/types/types';
 
 const props = defineProps({
   data: { type: Object as () => Content, required: true },

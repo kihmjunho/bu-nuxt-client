@@ -35,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import { Category, Content } from '@/types/types';
+import type { Category, Content } from '@/types/types';
 
 const props = defineProps({
   title: {

@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { Content, Contents } from '@/types/types';
+import type { Content, Contents } from '@/types/types';
 
 const { api } = useRuntimeConfig().public;
 
