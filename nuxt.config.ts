@@ -6,6 +6,8 @@ export default defineNuxtConfig({
       name: 'bodyundefined',
       short_name: 'bodyundefined',
       description: 'Try something I have never done',
+      background_color: '#000000',
+      theme_color: '#000000',
       icons: [
         {
           src: 'https://buimages.s3.ap-northeast-2.amazonaws.com/buicon.png',
