@@ -6,6 +6,7 @@ export default defineNuxtConfig({
       name: 'bodyundefined',
       short_name: 'bodyundefined',
       description: 'Try something I have never done',
+      start_url: '/',
       background_color: '#000000',
       theme_color: '#000000',
       icons: [
@@ -16,9 +17,9 @@ export default defineNuxtConfig({
         },
       ],
     },
-    workbox: {
-      navigateFallback: '/',
-    },
+    // workbox: {
+    //   navigateFallback: '/',
+    // },
     devOptions: {
       enabled: true,
       type: 'module',
