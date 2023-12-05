@@ -28,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import { SubmitUser } from '@/types/types';
+import type { SubmitUser } from '@/types/types';
 
 const props = defineProps({ error: String });
 

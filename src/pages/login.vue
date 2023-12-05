@@ -8,7 +8,7 @@
       content="https://buimages.s3.ap-northeast-2.amazonaws.com/cover.jpg"
     />
   </Head>
-
+  login
   <Section>
     <SectionTitle>login</SectionTitle>
     <UserLogin @emitLogin="loginEvent" :error="renderError" />
@@ -18,7 +18,7 @@
 <script setup lang="ts">
 import { useUserStore } from '@/stores/user';
 
-import { SubmitUser } from '@/types/types';
+import { type SubmitUser } from '@/types/types';
 
 const { api } = useRuntimeConfig().public;
 const { push } = useRouter();

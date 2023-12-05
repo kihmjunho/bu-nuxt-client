@@ -41,7 +41,7 @@ export const useUser = (api: string) => {
 
   async function getUserData(token: string) {
     try {
-      const { data } = await axios.get(`${api}users/get-user`, {
+      const { data } = await axios.get(`${api}users`, {
         headers: {
           Authorization: `Bearer ${token}` || '',
         },
